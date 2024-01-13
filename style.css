@@ -59,6 +59,8 @@ section button{
 }
 
 footer {
+  /* display: flex;
+  justify-content: space-evenly; */
     background-color: #333; 
     color: white;
     text-align: center;
@@ -69,17 +71,6 @@ footer {
 }
 
 
-#animatedDiv {
-    display: none;
-    color: #fff;
-    text-align: center;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.5s, transform 0.5s;
-}
 
 /* Styles for the button */
 #showDivButton {
@@ -89,32 +80,22 @@ footer {
     border: none;
     cursor: pointer;
 }
-.share-btn {
-display: inline-block;
-color: #ffffff;
-border: none;
-padding: 0.1em 0.6em;
-outline: none;
+.share-btn i{
 text-align: center;
-font-size: 0.9em;
-margin: 0 0.2em;
+font-size: 2rem;
+margin: .5rem;
 }
 
 .share-btn:focus,
 .share-btn:hover {
 text-decoration: none;
-opacity: 0.8;
+opacity: 0.7;
 }
 
 .share-btn:active {
 color: #e2e2e2;
 }
 
-.share-btn.twitter     { background: #55acee; }
-.share-btn.facebook    { background: #3B5998; }
-.share-btn.reddit      { background: #ff5700; }
-.share-btn.linkedin    { background: #4875B4; }
-.share-btn.email       { background: #444444; }
 
 
 #fert{
@@ -126,5 +107,28 @@ color: #e2e2e2;
 
 #video {
     display: none;
+}
+
+
+.popup {
+  position: fixed;
+  
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 

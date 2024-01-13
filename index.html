@@ -7,6 +7,9 @@
     <title>Admin Page</title>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
   
 </head>
@@ -35,34 +38,41 @@
  
         <a href="review.html"><div id="qrcode"></div></a>
 
-        <button id="showDivButton" onclick="showAnimatedDiv()">Share QR</button>
+        <button id="showDivButton" onclick="openPopup()">Share QR</button>
 
 
-        <div id="animatedDiv">
-            <div id="shareLinks">
+        <div id="popup" class="popup">
+            <div id="shareLinks" class="popup-content" >
+                <span class="close" onclick="closePopup()">&times;</span>
 
+                <a id="twitterLink" href="#" target="_blank" class="share-btn twitter"><i class="fa-brands fa-x-twitter" style="color: #000000;"></i></a>
+                <!-- Facebook -->
+                <a id="facebookLink" href="#" target="_blank" class="share-btn facebook"><i class="fa-brands fa-facebook" style="color: #0022ff;"></i></a>
+                <!-- Reddit -->
+                <a id="redditLink" href="#" target="_blank" class="share-btn reddit"><i class="fa-brands fa-reddit" style="color: #ec5f0d;"></i></a>
+                <!-- LinkedIn -->
+                <a id="linkedinLink" href="#" target="_blank" class="share-btn linkedin"><i class="fa-brands fa-linkedin" style="color: #0a6feb;"></i></a>
 
-        <!-- Twitter -->
-        <a id="twitterLink" href="#" target="_blank" class="share-btn twitter">Twitter</a>
-        <!-- Facebook -->
-        <a id="facebookLink" href="#" target="_blank" class="share-btn facebook">Facebook</a>
-        <!-- Reddit -->
-        <a id="redditLink" href="#" target="_blank" class="share-btn reddit">Reddit</a>
-        <!-- LinkedIn -->
-        <a id="linkedinLink" href="#" target="_blank" class="share-btn linkedin">LinkedIn</a>
-
-        <a id="emailLink" href="mailto:?subject=QR Code&body=" target="_blank" class="share-btn email">Email</a>
+                <a id="emailLink" href="mailto:?subject=QR Code&body=" target="_blank" class="share-btn email"><i class="fa-regular fa-envelope" style="color: rgb(203, 38, 38);"></i></a>
             </div>
+        </div>
+
+        <div id="animatedDiv" >
+            
         </div>
 
     </section>
 
 
 <footer>
-    <p>Your Footer Content</p>
+    <ul>
+        <li><a>Terms & Conditions</a>≈</li>
+        <li><a>Disclamer</a></li>
+        <li><a>Privacy Policy</a></li>
+    </ul>
 </footer>
 
-<script src="java.js"></script>
+<script src="script.js"></script>
 
 </body>
 
