@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  
+</head>
+<body >
+  
+
+    <header>
+        <h1>Welcome to the Admin Page</h1>
+    </header>
+
+    
+    <nav>
+        <div class="btn-group">
+            <a href="#">Home</a>
+            <a href="#">About us</a>
+            <a href="#">Contact us</a> 
+        </div>
+    </nav>
+    <hr>
+    
+    <section>
+        <h2>Enter Seminar Name</h2>
+        <input type="text" id="text" placeholder="Enter Host Name">
+    
+        <button onclick="generateQRCode()">Generate Seminar Link</button>
+ 
+        <a href="review.html"><div id="qrcode"></div></a>
+
+        <button id="showDivButton" onclick="showAnimatedDiv()">Share QR</button>
+
+
+        <div id="animatedDiv">
+            <div id="shareLinks">
+
+
+        <!-- Twitter -->
+        <a id="twitterLink" href="#" target="_blank" class="share-btn twitter">Twitter</a>
+        <!-- Facebook -->
+        <a id="facebookLink" href="#" target="_blank" class="share-btn facebook">Facebook</a>
+        <!-- Reddit -->
+        <a id="redditLink" href="#" target="_blank" class="share-btn reddit">Reddit</a>
+        <!-- LinkedIn -->
+        <a id="linkedinLink" href="#" target="_blank" class="share-btn linkedin">LinkedIn</a>
+
+        <a id="emailLink" href="mailto:?subject=QR Code&body=" target="_blank" class="share-btn email">Email</a>
+            </div>
+        </div>
+
+    </section>
+
+
+<footer>
+    <p>Your Footer Content</p>
+</footer>
+
+<script src="java.js"></script>
+
+</body>
+
+
+
+</html>
