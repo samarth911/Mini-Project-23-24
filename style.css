@@ -7,8 +7,11 @@
 }
 
 body{
+ height: 100vh;
+ width: 100vw;
   background-image: url("bgd.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 header {
@@ -18,16 +21,7 @@ header {
   padding: 1em;
 }
 
-nav a{
-  padding: 0 2rem;
-  margin: 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #96a5c5;
-}
-nav a :hover{
-  background-color: #000000;
-}
+
 
 .btn-group{
   display: flex;
@@ -59,8 +53,7 @@ section button{
 }
 
 footer {
-  /* display: flex;
-  justify-content: space-evenly; */
+
     background-color: #333; 
     color: white;
     text-align: center;
@@ -71,8 +64,6 @@ footer {
 }
 
 
-
-/* Styles for the button */
 #showDivButton {
     padding: 10px;
     background-color: #2ecc71;
@@ -108,7 +99,11 @@ color: #e2e2e2;
 #video {
     display: none;
 }
-
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .popup {
   position: fixed;
@@ -132,3 +127,44 @@ color: #e2e2e2;
   cursor: pointer;
 }
 
+
+.button-container {
+  position: relative;
+}
+
+#loadingButton {
+  z-index: 1;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8); /* Adjust the background color and opacity */
+  backdrop-filter: blur(10px); /* Adjust the blur amount */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.loading-container {
+  display: flex;
+}
+
+.loading-emoji {
+  font-size: 2em;
+  animation: bounce 1.5s infinite alternate;
+  margin: 0 0.5em;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}

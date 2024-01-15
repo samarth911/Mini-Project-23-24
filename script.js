@@ -1,49 +1,33 @@
 
+var qrcode = null;
 
 
-// Function to generate QR code
 function generateQRCode() {
-    var textToEncode = document.getElementById('text').value;
-
-    // Create QR code
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: textToEncode,
-        width: 128,
-        height: 128
-    });
-
-    updateQRCodeContainerStyling();
-    convertQRCodeToImageAndShare();
-}
-
-function convertQRCodeToImageAndShare() {
-    // Capture the QR code as an image
-    html2canvas(document.getElementById('qrcode')).then(function(canvas) {
-        // Convert canvas to base64 image data
-        var imageData = canvas.toDataURL('image/png');
-
-        // Update share links
-        updateShareLinks(imageData);
-    });
+    
+    
+        var textToEncode = document.getElementById('text').value;
+        if(qrcode===null) {
+            qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: textToEncode,
+                width: 128,
+                height: 128
+            });
+            startLoading();
+        }
+        else{
+            alert("QR code is already generated")
+        }
+       
+    
+   
 }
 
 
+const video = document.getElementById('video');
 
-function updateShareLinks(imageData) {
-    // Twitter
-    document.getElementById('twitterLink').href = 'https://twitter.com/share?url=' + encodeURIComponent(imageData);
+// Load face-api.js models
 
-    // Facebook
-    document.getElementById('facebookLink').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imageData);
 
-    // Reddit
-    document.getElementById('redditLink').href = 'https://reddit.com/submit?url=' + encodeURIComponent(imageData);
-
-    // LinkedIn
-    document.getElementById('linkedinLink').href = 'https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(imageData);
-
-    document.getElementById('emailLink').href = 'mailto:?subject=QR Code&body=' + encodeURIComponent('Check out this QR Code: ' + imageData);
-}
 
 
 async function startCamera() {
@@ -58,6 +42,27 @@ async function startCamera() {
         const video = document.getElementById('video');
         video.srcObject = stream;
         video.style.display = 'block';
+
+        Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+          ]).then(startVideo);
+          
+          video.addEventListener('play', () => {
+            const canvas = faceapi.createCanvasFromMedia(video);
+            document.body.append(canvas);
+            const displaySize = { width: video.width, height: video.height };
+            faceapi.matchDimensions(canvas, displaySize);
+      
+            setInterval(async () => {
+              const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors();
+              const resizedDetections = faceapi.resizeResults(detections, displaySize);
+              canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+              faceapi.draw.drawDetections(canvas, resizedDetections);
+              faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+            }, 100);
+          });
 
         video.addEventListener('click', () => {
             stopCamera(stream);
@@ -83,10 +88,18 @@ function generateRandomRating() {
     return Math.floor(Math.random() * 5) + 1;
 }
 
-function openPopup() {
+async function openPopup() {
    document.getElementById('popup').style.display = 'block';
 }
     
 function closePopup() {
     document.getElementById('popup').style.display = 'none';
 }
+
+
+function startLoading() {
+    document.getElementById('loadingOverlay').style.display = 'flex';
+    setTimeout(function() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }, 2000); // 5000 milliseconds = 5 seconds
+  }
